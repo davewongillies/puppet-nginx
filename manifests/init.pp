@@ -18,6 +18,11 @@ class nginx(
   }
 
   exec { 'reload-nginx':
+    command     => '/usr/sbin/nginx -t',
+    refreshonly => true,
+    notify      => Exec['reload-nginx-real']
+  }
+  exec { 'reload-nginx-real':
     command     => '/etc/init.d/nginx reload',
     refreshonly => true,
   }
