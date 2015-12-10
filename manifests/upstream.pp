@@ -19,7 +19,7 @@ define nginx::upstream(
   validate_bool($check_default_down)
   validate_re($check_type, ['^tcp$','^http$','^ssl_hello$','^mysql$','^ajp$','^fastcgi$'])
 
-  $target_dir = "/etc/nginx/upstreams.d/${name}/"
+  $target_dir = "/etc/nginx/upstreams.d/${name}"
 
   File {
     owner  => 'root',
