@@ -17,11 +17,11 @@ define nginx::upstream::member(
 
   file { $member_path:
     ensure  => $ensure,
-    owner   => root,
-    group   => root,
+    owner   => 'root',
+    group   => 'root',
     mode    => '0644',
     content => template('nginx/upstream.member.erb'),
-    notify  => Exec["rebuild-nginx-upstream-${upstream}"],
+    notify  => Exec['reload-nginx'],
     require => File["/etc/nginx/upstreams.d/${upstream}/"]
   }
 }
