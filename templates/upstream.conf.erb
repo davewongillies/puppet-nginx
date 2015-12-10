@@ -1,3 +1,9 @@
+upstream <%= @name %> {
+<%= "#{@strategy};" if @strategy != '' -%>
+<%= "keepalive #{@keepalive};" if @keepalive != false -%>
+
+ include <%= @target_dir %>/1_*.conf
+
 <% if @check_health != false -%>
 <%= "check interval=#{@check_interval} rise=#{@check_rise} fall=#{@check_fall} " -%>
 <%= "port=#{@check_port} " if @check_port != '' -%>
