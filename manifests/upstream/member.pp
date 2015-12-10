@@ -14,13 +14,14 @@ define nginx::upstream::member(
     default => $host,
   }
   $member_path = "/etc/nginx/upstreams.d/${upstream}/1_${name}.conf"
+
   file { $member_path:
+    ensure  => $ensure,
     owner   => root,
     group   => root,
-    mode    => 0644,
+    mode    => '0644',
     content => template('nginx/upstream.member.erb'),
-    ensure  => $ensure,
     notify  => Exec["rebuild-nginx-upstream-${upstream}"],
-   require  => File["/etc/nginx/upstreams.d/${upstream}/"]
+    require => File["/etc/nginx/upstreams.d/${upstream}/"]
   }
 }
